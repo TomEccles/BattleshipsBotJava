@@ -38,7 +38,7 @@ public class LeagueRunner
     _numberOfRounds = numberOfRoundsPerMatch;
     _playerTimeout = playerTimeout;
     _logDirectory = logDirectory;
-    setMatchResults(new ArrayList<IMatchResult>());
+    setMatchResults(new ArrayList<>());
     setLeagueScores(new HashMap<>());
     AssertPlayerNamesAreUnique(_playerWrappers);
   }
@@ -61,7 +61,7 @@ public class LeagueRunner
         player2.ResetPlayer();
 
         String logFilename = player1.getName() + " vs. " + player2.getName() + ".txt";
-        IMatchRunner runner = _factory.GetMatchRunner(player1, player2, _numberOfRounds, _playerTimeout, logFilename);
+        IMatchRunner runner = _factory.GetMatchRunner(player1, player2, _numberOfRounds, _playerTimeout, _logDirectory, logFilename);
 
         IMatchResult matchResult = runner.RunMatch();
 

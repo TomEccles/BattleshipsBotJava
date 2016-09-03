@@ -2,43 +2,41 @@ package BattleshipsAdjudicator;
 
 import org.joda.time.Duration;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 public class CommandLineArguments {
   private String PlayerDirectory;
-  public final String getPlayerDirectory()
-  {
+  public final String getPlayerDirectory() {
     return PlayerDirectory;
   }
-  private void setPlayerDirectory(String value)
-  {
+  private void setPlayerDirectory(String value) {
+    EnsureDirectoryExists(value);
     PlayerDirectory = value;
   }
+
   private int NumberOfRounds;
-  public final int getNumberOfRounds()
-  {
+  public final int getNumberOfRounds() {
     return NumberOfRounds;
   }
-  private void setNumberOfRounds(int value)
-  {
+  private void setNumberOfRounds(int value) {
     NumberOfRounds = value;
   }
+
   private String LogDirectory;
-  public final String getLogDirectory()
-  {
+  public final String getLogDirectory() {
     return LogDirectory;
   }
-  private void setLogDirectory(String value)
-  {
+  private void setLogDirectory(String value) {
+    EnsureDirectoryExists(value);
     LogDirectory = value;
   }
+
   private Duration PlayerTimeout = Duration.ZERO;
-  public final Duration getPlayerTimeout()
-  {
+  public final Duration getPlayerTimeout() {
     return PlayerTimeout;
   }
-  private void setPlayerTimeout(Duration value)
-  {
+  private void setPlayerTimeout(Duration value) {
     PlayerTimeout = value;
   }
 
@@ -102,6 +100,10 @@ public class CommandLineArguments {
       default:
         throw new UsageException("Unrecognised argument: " + argument);
     }
+  }
+
+  private boolean EnsureDirectoryExists(String directory) {
+    return new File(directory).mkdirs();
   }
 
   public static String USAGE = "Usage:" + "\r\n" +
