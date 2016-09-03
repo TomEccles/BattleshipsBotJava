@@ -14,7 +14,7 @@ public class ResultPrinter {
   }
 
   public final void Print(PrintStream printer) throws IOException {
-    printer.print("League scores:");
+    printer.println("League scores:");
 
     SortedSet<Map.Entry<IBattleshipsPlayerWrapper, Integer>> playersInOrder = SortingUtils.entriesSortedByValues(_scores);
 

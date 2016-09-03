@@ -349,7 +349,7 @@ public class Adjudicator implements IAdjudicator {
           result = "";
           break;
       }
-      _log.write(String.format("%3s%02d %-3s", row, col, result));
+      Log("%3s%02d %-3s", row, col, result);
     }
   }
 
@@ -361,6 +361,7 @@ public class Adjudicator implements IAdjudicator {
         _logTurn = 0;
       }
       _log.write(String.format(message, args));
+      _log.write("/n");
     }
   }
 

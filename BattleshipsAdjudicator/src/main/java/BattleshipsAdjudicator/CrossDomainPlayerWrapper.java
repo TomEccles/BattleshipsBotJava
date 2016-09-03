@@ -31,7 +31,7 @@ public class CrossDomainPlayerWrapper implements IBattleshipsPlayerWrapper {
     return entries.stream().filter(jarEntry ->
       !jarEntry.isDirectory() && jarEntry.getName().endsWith(".class")
     ).map(jarEntry -> {
-      String className = FilenameUtils.getBaseName(jarEntry.getName());
+      String className = FilenameUtils.getPath(jarEntry.getName()) + FilenameUtils.getBaseName(jarEntry.getName());
       className = className.replace('/', '.');
       try {
         return cl.loadClass(className);
