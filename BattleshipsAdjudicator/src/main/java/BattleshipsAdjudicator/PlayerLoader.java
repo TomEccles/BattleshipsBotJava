@@ -1,25 +1,22 @@
 package BattleshipsAdjudicator;
 
-import BattleshipsInterface.*;
+import org.apache.commons.io.FilenameUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
 
 public class PlayerLoader implements IPlayerLoader
 {
-  public PlayerLoader(String dllPath)
-  {
-    String name = (Path.GetFileNameWithoutExtension(dllPath) != null) ? Path.GetFileNameWithoutExtension(dllPath) : "NoName";
+  public PlayerLoader(File jarFile) throws IOException, InstantiationException, IllegalAccessException {
+    String name = Optional.ofNullable(FilenameUtils.getBaseName(jarFile.getName())).orElse("NoName");
 
-    System.AppDomain appDomain = AppDomain.CreateDomain(name);
-
-    setPlayer((IBattleshipsPlayerWrapper)appDomain.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, CrossDomainPlayerWrapper.class.FullName, false, BindingFlags.Default, null, new Object[] {dllPath, name}, null, null));
+    Player = new CrossDomainPlayerWrapper(jarFile, name);
   }
 
   private IBattleshipsPlayerWrapper Player;
   public final IBattleshipsPlayerWrapper getPlayer()
   {
     return Player;
-  }
-  private void setPlayer(IBattleshipsPlayerWrapper value)
-  {
-    Player = value;
   }
 }

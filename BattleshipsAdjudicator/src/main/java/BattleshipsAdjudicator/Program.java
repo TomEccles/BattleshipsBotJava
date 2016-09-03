@@ -1,12 +1,13 @@
 package BattleshipsAdjudicator;
 
-import java.io.IOException;
-import java.io.PrintStream;
+import org.apache.commons.io.FilenameUtils;
+
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Program {
-  static int main(String[] args) throws IOException {
+  static int main(String[] args) throws Exception {
     try {
       CommandLineArguments parsedArgs = new CommandLineArguments(args);
 
@@ -23,13 +24,10 @@ public class Program {
 
       PrintResults(leagueRunner, System.out);
 
-      try (PrintStream logWriter = new PrintStream(Paths.get(parsedArgs.getLogDirectory(), "Summary.txt").toString()))
-      {
+      try (PrintStream logWriter = new PrintStream(Paths.get(parsedArgs.getLogDirectory(), "Summary.txt").toString())) {
         PrintResults(leagueRunner, logWriter);
       }
-    }
-    catch (UsageException e)
-    {
+    } catch (UsageException e) {
       System.err.println(e.getMessage());
       System.err.println();
       System.err.println(CommandLineArguments.USAGE);
@@ -39,22 +37,18 @@ public class Program {
     return 0;
   }
 
-  private static ArrayList<IBattleshipsPlayerWrapper> LoadPlayers(String directory)
-  {
-    ArrayList<IBattleshipsPlayerWrapper> ret = new ArrayList<IBattleshipsPlayerWrapper>();
+  private static ArrayList<IBattleshipsPlayerWrapper> LoadPlayers(String directory) throws Exception {
+    ArrayList<IBattleshipsPlayerWrapper> ret = new ArrayList<>();
 
-//C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-    for (var playerFile : Directory.EnumerateFiles(directory, "*.dll"))
-    {
-      try
-      {
+    FilenameFilter filterJars = (File dir, String name) -> FilenameUtils.isExtension(name, "jar");
+
+    for (File playerFile : new File(directory).listFiles(filterJars)) {
+      try {
         PlayerLoader playerLoader = new PlayerLoader(playerFile);
         ret.add(playerLoader.getPlayer());
-      }
-      catch (RuntimeException e)
-      {
+      } catch (RuntimeException e) {
         System.out.printf("Error loading player from '%1$s':" + "\r\n", playerFile);
-        System.out.println(e);
+        System.out.println(e.toString());
       }
     }
 
