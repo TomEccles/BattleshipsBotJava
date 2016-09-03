@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Program {
-  static int main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
     try {
       CommandLineArguments parsedArgs = new CommandLineArguments(args);
 
@@ -15,7 +15,6 @@ public class Program {
 
       if (players.size() < 2) {
         System.out.printf("Insufficient players found (%1$s)" + "\r\n", players.size());
-        return 2;
       }
 
       LeagueRunner leagueRunner = new LeagueRunner(players, parsedArgs.getNumberOfRounds(), parsedArgs.getPlayerTimeout(), new MatchRunnerFactory(), parsedArgs.getLogDirectory());
@@ -31,10 +30,7 @@ public class Program {
       System.err.println(e.getMessage());
       System.err.println();
       System.err.println(CommandLineArguments.USAGE);
-      return 1;
     }
-
-    return 0;
   }
 
   private static ArrayList<IBattleshipsPlayerWrapper> LoadPlayers(String directory) throws Exception {

@@ -46,7 +46,7 @@ public class LeagueRunner
   /**
    Runs a league where every player plays every other player once
    */
-  public final void RunLeague() throws IOException {
+  public final void RunLeague() throws Exception {
     for (IBattleshipsPlayerWrapper player : _playerWrappers) {
       getLeagueScores().put(player, 0);
     }

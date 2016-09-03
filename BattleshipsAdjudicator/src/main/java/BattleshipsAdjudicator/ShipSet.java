@@ -1,7 +1,5 @@
 package BattleshipsAdjudicator;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -28,7 +26,6 @@ public class ShipSet implements Iterable<ValidShipPosition>
     return EShotResult.Miss;
   }
 
-  @NotNull
   public final Iterator<ValidShipPosition> iterator() {
     return _ships.iterator();
   }

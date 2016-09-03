@@ -1,9 +1,20 @@
-group 'com.softwire'
+group 'BattleshipsAdjudicator'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Battleships Adjudicator',
+                'Implementation-Version': version,
+                'Main-Class': 'BattleshipsAdjudicator.Program'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
 
 repositories {
     mavenCentral()
