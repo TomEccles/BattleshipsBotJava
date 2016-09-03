@@ -11,5 +11,5 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile files('libs/BattleshipsAdjudicator-all-1.0-SNAPSHOT.jar')
+    compile files('src/main/resources/BattleshipsAdjudicator-all-1.0-SNAPSHOT.jar')
 }

@@ -1,8 +1,9 @@
 package BattleshipsPracticeDummy;
 
-import java.util.*;
-
-import BattleshipsInterface.*;
+import BattleshipsInterface.EShipType;
+import BattleshipsInterface.IBattleshipsPlayer;
+import BattleshipsInterface.ICoordinate;
+import BattleshipsInterface.IShipPosition;
 import com.google.common.collect.Lists;
 
 public class PracticeDummy implements IBattleshipsPlayer
