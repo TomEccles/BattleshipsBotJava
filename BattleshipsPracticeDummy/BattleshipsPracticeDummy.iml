@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="BattleshipsPracticeDummy" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="BattleshipsPracticeDummy" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="BattleshipsPracticeDummy" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="BattleshipsPracticeDummy" external.system.module.version="1.0" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
@@ -14,8 +14,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Gradle: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="module-library" exported="">
-      <library name="Gradle: BattleshipsInterface-1.0">
+      <library name="Gradle: C__Work_Training2016_06_BattleShips_JavaBattleships_BattleshipsPracticeDummy_src_main_resources_BattleshipsInterface_1_0_jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/main/resources/BattleshipsInterface-1.0.jar!/" />
         </CLASSES>
@@ -23,5 +24,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.11" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
   </component>
 </module>
