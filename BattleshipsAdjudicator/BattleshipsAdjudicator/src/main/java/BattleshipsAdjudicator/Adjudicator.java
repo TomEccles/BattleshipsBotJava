@@ -100,6 +100,7 @@ public class Adjudicator implements IAdjudicator {
     }
 
     Log(GetBoards());
+    Log("\r\n");
 
     int turnCounter = 1;
     ICoordinate lastShot;
@@ -155,6 +156,7 @@ public class Adjudicator implements IAdjudicator {
 
   private IGameResult getDraw() throws IOException {
     Log("Game drawn");
+    Log("\r\n");
     return new GameResult(null, GameResultType.draw);
   }
 
@@ -168,21 +170,24 @@ public class Adjudicator implements IAdjudicator {
 
   private IGameResult getResult(IBattleshipsPlayerWrapper winner, GameResultType gameResultType) throws IOException {
     Log("%s won the game by %s", winner.getName(), gameResultType);
-    Log("");
+    Log("\r\n");
     Boolean haveTimers = false;
     if (_player1Timer != null) {
       haveTimers = true;
       Log("%s clock: %s ms", _player1ShortName, _player1Timer.getElapsedMilliseconds());
+      Log("\r\n");
     }
     if (_player2Timer != null) {
       haveTimers = true;
       Log("%s clock: %s ms", _player2ShortName, _player2Timer.getElapsedMilliseconds());
+      Log("\r\n");
     }
     if (Error != null) {
       if (haveTimers) {
-        Log("");
+        Log("\r\n");
       }
       Log("Error thrown: %s", Error);
+      Log("\r\n");
     }
     return new GameResult(winner, gameResultType);
   }

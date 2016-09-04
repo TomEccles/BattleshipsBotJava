@@ -14,13 +14,13 @@ public class ValidShipPosition {
     BoardSquare end = boardSquares.getRight();
 
     if (start.getColumn() != end.getColumn() && start.getRow() != end.getRow()) {
-      throw new InvalidShipPostionException("Diagonal ship {0}-{1}", start, end);
+      throw new InvalidShipPostionException(String.format("Diagonal ship %s-%s", start, end));
     }
 
     List<BoardSquare> shipSquares = CreateMiddleSquares(start, end);
 
     if (!ShipLengthIsCorrect(shipSquares)) {
-      throw new InvalidShipPostionException("Incorrect ship length {0} {1}-{2}", getShip(), start, end);
+      throw new InvalidShipPostionException(String.format("Incorrect ship length %s %s-%s", getShip(), start, end));
     }
 
     setSquares(shipSquares);

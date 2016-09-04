@@ -15,7 +15,7 @@ public class ShipSetValidator {
 
   public final void AssertAreValid() {
     if (_ships.getCount() != 5) {
-      throw new InvalidShipPostionException("{0} ships found (not 5)", _ships.getCount());
+      throw new InvalidShipPostionException(String.format("%d ships found (not 5)", _ships.getCount()));
     }
 
     AssertShipTypePresent(EShipType.aircraftCarrier);
@@ -29,7 +29,7 @@ public class ShipSetValidator {
 
   private void AssertShipTypePresent(EShipType typeToCheck) {
     if (!_ships.getStream().anyMatch(s -> s.getShip() == typeToCheck)) {
-      throw new InvalidShipPostionException("No {0} found", typeToCheck);
+      throw new InvalidShipPostionException(String.format("No %s found", typeToCheck));
     }
   }
 
