@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile files('src/main/resources/BattleshipsInterface-1.0.jar')
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile files('src/main/resources/BattleshipsAdjudicator-all-1.0-SNAPSHOT.jar')
 }

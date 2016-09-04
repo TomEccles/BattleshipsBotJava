@@ -14,8 +14,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.11" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="BattleshipsAdjudicator-all-1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: BattleshipsInterface-1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/BattleshipsInterface-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
