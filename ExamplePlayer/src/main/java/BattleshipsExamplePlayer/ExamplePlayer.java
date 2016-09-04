@@ -30,7 +30,7 @@ public class ExamplePlayer implements IBattleshipsPlayer {
     positions.add(new ShipPosition(EShipType.aircraftCarrier, 'B', 1, 'B', 5));
     positions.add(new ShipPosition(EShipType.battleship, 'D', 1, 'D', 4));
     positions.add(new ShipPosition(EShipType.destroyer, 'F', 1, 'F', 3));
-    positions.add(new ShipPosition(EShipType.submarine, 'H', 1, 'H', 2));
+    positions.add(new ShipPosition(EShipType.submarine, 'H', 1, 'H', 3));
     positions.add(new ShipPosition(EShipType.patrolBoat, 'J', 1, 'J', 2));
 
     return positions;
