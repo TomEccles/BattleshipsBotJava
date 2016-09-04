@@ -1,9 +1,7 @@
 package BattleshipsAdjudicator;
 
 import BattleshipsAdjudicator.Mocks.ShipPosition;
-import BattleshipsInterface.IShipPosition;
 import org.junit.Test;
-import sun.java2d.loops.ProcessPath;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

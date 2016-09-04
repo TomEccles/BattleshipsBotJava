@@ -31,15 +31,27 @@ public class AdjudicatorTests {
   @Test
   public void TestOutputWriting() throws IOException {
     // Arrange
-    CountingOutputStream outputStream = new CountingOutputStream(new ByteArrayOutputStream());
-    OutputStreamWriter outputWriter = new OutputStreamWriter(outputStream);
-    IAdjudicator a = new Adjudicator(new SafeNamePlayer(), new SafeNamePlayerKiller(), longPlayerTimeout, outputWriter);
+    CountingOutputStream outputStream = null;
+    OutputStreamWriter outputWriter = null;
+    try {
+      outputStream = new CountingOutputStream(new ByteArrayOutputStream());
+      outputWriter = new OutputStreamWriter(outputStream);
+      IAdjudicator a = new Adjudicator(new SafeNamePlayer(), new SafeNamePlayerKiller(), longPlayerTimeout, outputWriter);
 
-    // Act
-    a.RunGame();
+      // Act
+      a.RunGame();
 
-    // Assert
-    assertThat(outputStream.getCount()).isGreaterThan(1000);
+      // Assert
+      outputWriter.flush();
+      assertThat(outputStream.getCount()).isGreaterThan(1000);
+    } finally {
+      if (outputWriter != null) {
+        outputWriter.close();
+      }
+      if (outputStream != null) {
+        outputStream.close();
+      }
+    }
   }
 
   @Test
