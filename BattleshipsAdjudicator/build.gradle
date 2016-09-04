@@ -1,5 +1,3 @@
-group 'BattleshipsAdjudicator'
-
 subprojects {
     apply plugin: 'java'
 
