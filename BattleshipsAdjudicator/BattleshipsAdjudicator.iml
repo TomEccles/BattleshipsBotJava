@@ -22,5 +22,6 @@
     <orderEntry type="library" exported="" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time:2.9.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.assertj:assertj-core:3.5.2" level="project" />
   </component>
 </module>

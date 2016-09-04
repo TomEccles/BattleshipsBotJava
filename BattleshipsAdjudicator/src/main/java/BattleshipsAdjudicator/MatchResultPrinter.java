@@ -22,7 +22,7 @@ public class MatchResultPrinter {
 
   private void PrintResult(IMatchResult result, PrintStream printer) throws IOException {
     if (result.getWinner() == null) {
-      printer.println(String.format("%s vs %s - draw: (%d) wins to (%d) wins ((%d) draws)", result.getPlayer1().getName(), result.getPlayer2().getName(), result.getWinnerWins(), result.getLoserWins(), result.getDraws()));
+      printer.println(String.format("%s vs %s - draw: %d wins to %d wins (%d draws)", result.getPlayer1().getName(), result.getPlayer2().getName(), result.getWinnerWins(), result.getLoserWins(), result.getDraws()));
     } else {
       printer.println(String.format("%s vs %s - %s wins: %d wins to %d wins (%d draws)", result.getPlayer1().getName(), result.getPlayer2().getName(), result.getWinner().getName(), result.getWinnerWins(), result.getLoserWins(), result.getDraws()));
     }

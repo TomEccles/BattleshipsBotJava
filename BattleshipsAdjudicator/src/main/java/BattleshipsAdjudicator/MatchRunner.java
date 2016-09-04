@@ -58,10 +58,11 @@ public class MatchRunner implements IMatchRunner
 
   private IMatchResult CreateMatchResult(ArrayList<IGameResult> gameResults)
   {
-    Integer numberOfDraws = toIntExact(gameResults.stream().filter(gr -> gr.getWinner() != null).count());
+    Integer numberOfDraws = toIntExact(gameResults.stream().filter(gr -> gr.getWinner() == null).count());
 
     Map<IBattleshipsPlayerWrapper, List<IGameResult>> playerResults = gameResults
             .stream()
+            .filter(gr -> gr.getWinner() != null)
             .collect(Collectors.groupingBy(IGameResult::getWinner));
 
     List<IBattleshipsPlayerWrapper> players = Lists.newArrayList(playerResults.keySet());

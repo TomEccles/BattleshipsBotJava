@@ -17,7 +17,7 @@ public class BoardSquare
   @Override
   public String toString()
   {
-    return String.format("%1$s%02d", getRow(), getColumn());
+    return String.format("%s%02d", getRow(), getColumn());
   }
 
   private void ValidateColumn()
@@ -82,19 +82,24 @@ public class BoardSquare
   }
 
   @Override
-  public boolean equals(Object that)
-  {
-    if (that == null || !that.getClass().isInstance(BoardSquare.class)) {
-      return false;
-    }
-    BoardSquare other = (BoardSquare) that;
-    return this.getColumn() == other.getColumn() && this.getRow() == other.getRow();
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    BoardSquare that = (BoardSquare) o;
+
+    if (Row != that.Row) return false;
+    if (Column != that.Column) return false;
+    return IsHit == that.IsHit;
+
   }
 
   @Override
-  public int hashCode()
-  {
-    return this.getRow() ^ this.getColumn();
+  public int hashCode() {
+    int result = (int) Row;
+    result = 31 * result + Column;
+    result = 31 * result + (IsHit ? 1 : 0);
+    return result;
   }
 }
 

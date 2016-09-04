@@ -63,7 +63,7 @@ public class BoardPrinter
   private char GetSquareChar(char row, int column) {
     ValidShipPosition shipInSquare = _ships
             .getStream()
-            .filter(ship -> ship.getShipSquare(row, column) != null)
+            .filter(ship -> ship.getShipSquare(row, column).isPresent())
             .findFirst()
             .orElse(null);
 

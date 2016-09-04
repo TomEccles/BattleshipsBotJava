@@ -15,6 +15,7 @@ public class Program {
 
       if (players.size() < 2) {
         System.out.printf("Insufficient players found (%1$s)" + "\r\n", players.size());
+        System.exit(2);
       }
 
       LeagueRunner leagueRunner = new LeagueRunner(players, parsedArgs.getNumberOfRounds(), parsedArgs.getPlayerTimeout(), new MatchRunnerFactory(), parsedArgs.getLogDirectory());
@@ -30,7 +31,9 @@ public class Program {
       System.err.println(e.getMessage());
       System.err.println();
       System.err.println(CommandLineArguments.USAGE);
+      System.exit(1);
     }
+    System.exit(0);
   }
 
   private static ArrayList<IBattleshipsPlayerWrapper> LoadPlayers(String directory) throws Exception {

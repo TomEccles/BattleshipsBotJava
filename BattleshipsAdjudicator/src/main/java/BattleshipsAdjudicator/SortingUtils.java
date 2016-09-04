@@ -10,7 +10,7 @@ public class SortingUtils {
     SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<>(
       new Comparator<Map.Entry<K,V>>() {
         @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
-          int res = e1.getValue().compareTo(e2.getValue());
+          int res = e2.getValue().compareTo(e1.getValue());
           return res != 0 ? res : 1;
         }
       }

@@ -34,75 +34,61 @@ public class ShipSetValidator {
   }
 
   private void AssertShipsNotTouching() {
-    ArrayList<BoardSquare> ShipSquares = new ArrayList<>();
-
-    for (int i = 0; i < _ships.getCount(); i++) {
+    int shipCount = _ships.getCount();
+    for (int i = 0; i < shipCount; i++) {
       Iterable<BoardSquare> adjacentSquares = GetAllAdjacentSquares(_ships.getSquaresAt(i));
 
-      for (int j = 0; j < _ships.getCount(); j++) {
-        if (i != j) {
-          AssertNoOverlap(_ships.getSquaresAt(j), adjacentSquares);
-        }
+      for (int j = i+1; j < shipCount; j++) {
+        AssertNoOverlap(adjacentSquares, _ships.getSquaresAt(j));
       }
     }
   }
 
   private void AssertNoOverlap(Iterable<BoardSquare> lhs, Iterable<BoardSquare> rhs) {
     int totalSquares = Iterables.size(lhs) + Iterables.size(rhs);
-    int totalDistinctSquares = Sets.newHashSet(Iterables.concat(lhs, rhs)).size();
+    Set<BoardSquare> distinctSquares = Sets.newHashSet(Iterables.concat(lhs, rhs));
+    int totalDistinctSquares = distinctSquares.size();
 
-    if (totalSquares != totalDistinctSquares)
-    {
+    if (totalSquares != totalDistinctSquares) {
       throw new InvalidShipPostionException("Touching ships found");
     }
   }
 
-  private Iterable<BoardSquare> GetAllAdjacentSquares(Iterable<BoardSquare> squares)
-  {
-    ArrayList<BoardSquare> ret = new ArrayList<>();
+  private Iterable<BoardSquare> GetAllAdjacentSquares(Iterable<BoardSquare> squares) {
+    Set<BoardSquare> ret = new HashSet<>();
 
-    for (BoardSquare square : squares)
-    {
+    for (BoardSquare square : squares) {
       ret.addAll(GetAllAdjacentSquares(square));
     }
 
-    return Sets.newHashSet(ret);
+    return ret;
   }
 
-  private Collection<BoardSquare> GetAllAdjacentSquares(BoardSquare square)
-  {
+  private Collection<BoardSquare> GetAllAdjacentSquares(BoardSquare square) {
     ArrayList<BoardSquare> ret = new ArrayList<>();
 
-    if (square.getIsOnBottomEdge()&& square.getIsOnRightEdge())
-    {
+    if (!square.getIsOnBottomEdge()&& !square.getIsOnRightEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() + 1), square.getColumn() + 1));
     }
-    if (square.getIsOnBottomEdge())
-    {
+    if (!square.getIsOnBottomEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() + 1), square.getColumn()));
     }
-    if (square.getIsOnBottomEdge()&& square.getIsOnLeftEdge())
-    {
+    if (!square.getIsOnBottomEdge()&& !square.getIsOnLeftEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() + 1), square.getColumn() - 1));
     }
-    if (square.getIsOnRightEdge())
-    {
+    if (!square.getIsOnRightEdge()) {
       ret.add(new BoardSquare(square.getRow(), square.getColumn() + 1));
     }
-    if (square.getIsOnLeftEdge())
-    {
+    if (!square.getIsOnLeftEdge()) {
       ret.add(new BoardSquare(square.getRow(), square.getColumn() - 1));
     }
-    if (square.getIsOnTopEdge()&& square.getIsOnRightEdge())
-    {
+    if (!square.getIsOnTopEdge()&& !square.getIsOnRightEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() - 1), square.getColumn() + 1));
     }
-    if (square.getIsOnTopEdge())
-    {
+    if (!square.getIsOnTopEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() - 1), square.getColumn()));
     }
-    if (square.getIsOnTopEdge()&& square.getIsOnLeftEdge())
-    {
+    if (!square.getIsOnTopEdge()&& !square.getIsOnLeftEdge()) {
       ret.add(new BoardSquare((char)(square.getRow() - 1), square.getColumn() - 1));
     }
 

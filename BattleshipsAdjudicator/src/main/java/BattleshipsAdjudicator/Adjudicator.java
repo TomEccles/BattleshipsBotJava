@@ -78,9 +78,11 @@ public class Adjudicator implements IAdjudicator {
     System.gc();
 
     Log("Player 1: %s", _player1.getName());
+    Log("\r\n");
     Log("Player 2: %s", _player2.getName());
+    Log("\r\n");
     Log("Timeout : %s ms", _playerTimeout.getMillis());
-    Log("");
+    Log("\r\n");
 
     _player1Timer = new Timer(_playerTimeout);
     _player2Timer = new Timer(_playerTimeout);
@@ -100,7 +102,7 @@ public class Adjudicator implements IAdjudicator {
     Log(GetBoards());
 
     int turnCounter = 1;
-    ICoordinate lastShot = null;
+    ICoordinate lastShot;
 
     while (true) {
       try {
@@ -198,7 +200,7 @@ public class Adjudicator implements IAdjudicator {
 
       try {
         return proxy.call();
-      } catch(UncheckedTimeoutException e) {
+      } catch(Exception e) {
         throw new TimeoutException(String.format("The operation has timed out after %s ms.", timeout.getMillis()));
       }
     } else {
@@ -280,50 +282,50 @@ public class Adjudicator implements IAdjudicator {
   }
 
   private void appendBlanks(StringBuilder builder, int number) {
-    char[] charArray = new char[number];
-    Arrays.fill(charArray, ' ');
-    String blankSpace = new String(charArray);
-    builder.append(blankSpace);
+    if (number > 0) {
+      char[] charArray = new char[number];
+      Arrays.fill(charArray, ' ');
+      String blankSpace = new String(charArray);
+      builder.append(blankSpace);
+    }
   }
 
   private String GetBoard(String name, ShipSet ships) {
     StringBuilder board = new StringBuilder();
-    int indent = (23 - name.length()) / 2;
+    int indent = (26 - name.length()) / 2;
     if (indent > 0) {
       appendBlanks(board, indent);
     }
     board.append(name);
-    board.append("\n");
-    board.append("\n");
+    board.append("\r\n");
+    board.append("\r\n");
     board.append(new BoardPrinter(ships).getBoard());
     return board.toString();
   }
 
-  private Stream<String> formatBoard(String board) {
-    return Lists.newArrayList(board.split("\n")).stream().map(String::trim);
+  private List<String> formatBoard(String board) {
+    return Lists.newArrayList(board.split("\r\n"));
   }
 
   private String GetBoards() {
-    Stream<String> board1LineStream = formatBoard(GetBoard(_player1ShortName, _player1Ships));
-    Stream<String> board2LineStream = formatBoard(GetBoard(_player2ShortName, _player2Ships));
-    List<String> board1Lines = board1LineStream.collect(Collectors.toList());
-    List<String> board2Lines = board2LineStream.collect(Collectors.toList());
+    List<String> board1Lines = formatBoard(GetBoard(_player1ShortName, _player1Ships));
+    List<String> board2Lines = formatBoard(GetBoard(_player2ShortName, _player2Ships));
 
-    int columnWidth = board1LineStream.map(String::length).max(Integer::max).get() + 5;
-    long lines = (board1LineStream.count() > board2LineStream.count()) ? board1LineStream.count() : board2LineStream.count();
+    int columnWidth = board1Lines.stream().map(String::length).max(Integer::max).get() + 10;
+    long lines = (board1Lines.size() > board2Lines.size()) ? board1Lines.size() : board2Lines.size();
 
     StringBuilder ret = new StringBuilder();
     for(int i = 0; i < lines; ++i) {
       appendBlanks(ret, 3);
-      String col1 = (i < board1LineStream.count()) ? board1Lines.get(i) : "";
+      String col1 = (i < board1Lines.size()) ? board1Lines.get(i) : "";
       ret.append(col1);
-      String col2 = (i < board2LineStream.count()) ? board2Lines.get(i) : "";
+      String col2 = (i < board2Lines.size()) ? board2Lines.get(i) : "";
       if (!col2.equals("")) {
         appendBlanks(ret, columnWidth - col1.length());
         ret.append(col2);
-        ret.append("\n");
+        ret.append("\r\n");
       } else {
-        ret.append("\n");
+        ret.append("\r\n");
       }
     }
 
@@ -333,7 +335,7 @@ public class Adjudicator implements IAdjudicator {
   private void LogTurn(int turn, char row, int col, EShotResult hit) throws IOException {
     if (_log != null) {
       if (_logTurn != turn) {
-        _log.write("\n");
+        _log.write("\r\n");
         _log.write(String.format("%5s.", turn));
         _logTurn = turn;
       }
@@ -349,19 +351,18 @@ public class Adjudicator implements IAdjudicator {
           result = "";
           break;
       }
-      Log("%3s%02d %-3s", row, col, result);
+      _log.write(String.format("%3s%02d %-3s", row, col, result));
     }
   }
 
   private void Log(String message, Object... args) throws IOException {
     if (_log != null) {
       if (_logTurn > 0) {
-        _log.write("\n");
-        _log.write("\n");
+        _log.write("\r\n");
+        _log.write("\r\n");
         _logTurn = 0;
       }
       _log.write(String.format(message, args));
-      _log.write("/n");
     }
   }
 
