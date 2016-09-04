@@ -160,7 +160,7 @@ public class Adjudicator implements IAdjudicator {
 
   private IGameResult getResultForException(IBattleshipsPlayerWrapper winner, Exception e) throws IOException {
     Error = e;
-    GameResultType result = ((e.getClass().isInstance(OutOfTimeException.class)) || (e.getClass().isInstance(TimeoutException.class)))
+    GameResultType result = ((e instanceof OutOfTimeException) || (e instanceof TimeoutException))
     ? GameResultType.victoryTimeout
     : GameResultType.victoryException;
     return getResult(winner, result);
@@ -198,11 +198,7 @@ public class Adjudicator implements IAdjudicator {
               TimeUnit.MILLISECONDS
       );
 
-      try {
-        return proxy.call();
-      } catch(Exception e) {
-        throw new TimeoutException(String.format("The operation has timed out after %s ms.", timeout.getMillis()));
-      }
+      return proxy.call();
     } else {
       return callback.call();
     }
