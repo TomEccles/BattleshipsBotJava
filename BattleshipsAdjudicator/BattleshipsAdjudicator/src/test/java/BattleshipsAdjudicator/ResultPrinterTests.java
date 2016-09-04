@@ -1,4 +1,4 @@
-package BattleshipsAdjudicator.Tests;
+package BattleshipsAdjudicator;
 
 import java.io.*;
 import java.util.*;

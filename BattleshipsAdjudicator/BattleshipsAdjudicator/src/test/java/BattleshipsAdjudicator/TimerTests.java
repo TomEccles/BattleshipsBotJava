@@ -1,4 +1,4 @@
-package BattleshipsAdjudicator.Tests;
+package BattleshipsAdjudicator;
 
 import BattleshipsAdjudicator.OutOfTimeException;
 import BattleshipsAdjudicator.Timer;
