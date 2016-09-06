@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,6 +24,9 @@ public class Adjudicator implements IAdjudicator {
   ///   TODO: Command line flag to disable this
   /// </summary>
   private final Boolean UseThreadKiller = true;
+
+  private static ExecutorService executor = Executors.newCachedThreadPool();
+  private static TimeLimiter timeLimiter = new SimpleTimeLimiter(executor);
 
   private Exception Error;
   public Exception getException(){
@@ -194,9 +195,7 @@ public class Adjudicator implements IAdjudicator {
 
   private <T> T callAndMaybeMonitorForTimeout(Callable<T> callback, Duration timeout) throws Exception {
     if (UseThreadKiller) {
-      TimeLimiter limiter = new SimpleTimeLimiter();
-
-      Callable<T> proxy = limiter.newProxy(
+      Callable<T> proxy = timeLimiter.newProxy(
               callback,
               Callable.class,
               timeout.getMillis(),
