@@ -1,4 +1,4 @@
-import BattleshipsExamplePlayer.F632hmPa4lrn;
+import BattleshipsExamplePlayer.F632msPa4lrn;
 import BattleshipsInterface.ICoordinate;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class PlayerTest {
     public void testCanGetShips()
     {
         for (int i = 0; i < 100; i++) {
-            F632hmPa4lrn player = new F632hmPa4lrn();
+            F632msPa4lrn player = new F632msPa4lrn();
             assertEquals(player.GetShipPositions().iterator().hasNext(), true);
         }
     }
@@ -27,7 +27,7 @@ public class PlayerTest {
     @Test
     public void testCanFire()
     {
-        F632hmPa4lrn player = new F632hmPa4lrn();
+        F632msPa4lrn player = new F632msPa4lrn();
         player.GetShipPositions();
         ICoordinate coordinate = player.SelectTarget();
         assertNotNull(coordinate);

@@ -1,8 +1,16 @@
 package BattleshipsExamplePlayer;
 
+import BattleshipsExamplePlayer.Board.Coordinate;
+import BattleshipsExamplePlayer.Board.Square;
+import BattleshipsExamplePlayer.Board.SquareState;
 import BattleshipsExamplePlayer.Firing.*;
+import BattleshipsExamplePlayer.Firing.Scorers.ClusterOrHotScorer;
+import BattleshipsExamplePlayer.Firing.Scorers.HottestSquareScorer;
+import BattleshipsExamplePlayer.Firing.Scorers.MostShipScorer;
 import BattleshipsExamplePlayer.Placing.AntiFourPlacer;
 import BattleshipsExamplePlayer.Placing.FriendlyShipPosition;
+import BattleshipsExamplePlayer.Firing.Heatmap;
+import BattleshipsExamplePlayer.Placing.PlacementAnalyser;
 import BattleshipsInterface.IBattleshipsPlayer;
 import BattleshipsInterface.ICoordinate;
 import BattleshipsInterface.IShipPosition;
@@ -10,7 +18,7 @@ import javafx.util.Pair;
 
 import java.util.*;
 
-public class F632hmPa4lrn implements IBattleshipsPlayer {
+public class F632msPa4lrn implements IBattleshipsPlayer {
   private OpponentsBoard board;
   private Square lastShot;
   private List<IFiringStrategy> strategies;
@@ -31,6 +39,7 @@ public class F632hmPa4lrn implements IBattleshipsPlayer {
     gameIndex++;
     logger.close();
     //if (gameIndex % 10 == 0) logger.openNext(getName());
+    if (board != null) heatmap.registerGame(board);
     this.board = new OpponentsBoard();
 
     if(lastPlacing != null) {
@@ -40,7 +49,7 @@ public class F632hmPa4lrn implements IBattleshipsPlayer {
 
     strategies = new ArrayList<>();
     strategies.add(new SinkingStrategy());
-    strategies.add(new SixThreeTwoStripingStrategy(new HottestSquareScorer(heatmap, 4)));
+    strategies.add(new SixThreeTwoStripingStrategy(new MostShipScorer()));
 
     PlacementAnalyser analyser = new PlacementAnalyser(won, logger);
     int attempts = 100;
@@ -76,7 +85,6 @@ public class F632hmPa4lrn implements IBattleshipsPlayer {
     if (b) {
       hits++;
       board.processHit(this.lastShot);
-      heatmap.registerHit(this.lastShot);
       List<Square> sinkingShip = board.getContiguousHits(this.lastShot);
       boolean sunk = isSunk(board, sinkingShip);
       int size = sinkingShip.size();
@@ -95,27 +103,22 @@ public class F632hmPa4lrn implements IBattleshipsPlayer {
 
       if (hits == 17) {
         // We win!
-        for (Square sq : board.getEmpties()) {
-          heatmap.registerMiss(sq);
-        }
+        board.getSquares(SquareState.unknown).forEach(board::addMissIfNotHit);
       }
     }
     else {
       Square square = this.lastShot;
-      heatmap.registerMiss(square);
       board.addMissIfNotHit(square);
-      for (Square neighbour : OpponentsBoard.neighbours(square)) {
-        if (board.state(neighbour) == SquareState.hit) {
-          List<Square> sinkingShip = board.getContiguousHits(neighbour);
-          boolean sunk = isSunk(board, sinkingShip);
-          int size = sinkingShip.size();
-          if (sunk) {
-            board.sunk(size);
-            board.addMissesAllAround(sinkingShip);
-            logger.log("sunk a ship of size " + size);
-          }
+      OpponentsBoard.neighbours(square).stream().filter(neighbour -> board.state(neighbour) == SquareState.hit).forEach(neighbour -> {
+        List<Square> sinkingShip = board.getContiguousHits(neighbour);
+        boolean sunk = isSunk(board, sinkingShip);
+        int size = sinkingShip.size();
+        if (sunk) {
+          board.sunk(size);
+          board.addMissesAllAround(sinkingShip);
+          logger.log("sunk a ship of size " + size);
         }
-      }
+      });
 
     }
   }
