@@ -1,6 +1,8 @@
 package BattleshipsExamplePlayer.Firing;
 
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Board.SquareState;
+import BattleshipsExamplePlayer.Firing.Scorers.IScorer;
+import BattleshipsExamplePlayer.Board.Square;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +53,7 @@ public class StripingStrategy implements IFiringStrategy {
 
     private List<Square> validSquares(OpponentsBoard board) {
         List<Square> empties =
-                board.getEmpties()
+                board.getSquares(SquareState.unknown)
                     .stream()
                     .filter(this::good)
                     .collect(Collectors.toList());

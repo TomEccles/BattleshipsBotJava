@@ -1,13 +1,10 @@
 package BattleshipsExamplePlayer.Placing;
 
 import BattleshipsExamplePlayer.Logger;
-import BattleshipsExamplePlayer.PlacementAnalyser;
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Board.Square;
 import BattleshipsInterface.EShipType;
 import BattleshipsInterface.IShipPosition;
 
-import java.io.Console;
-import java.io.Writer;
 import java.util.*;
 
 /**

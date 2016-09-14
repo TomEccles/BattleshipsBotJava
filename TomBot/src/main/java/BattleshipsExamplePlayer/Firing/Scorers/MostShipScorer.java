@@ -1,8 +1,7 @@
-package BattleshipsExamplePlayer.Firing;
+package BattleshipsExamplePlayer.Firing.Scorers;
 
-import BattleshipsExamplePlayer.Square;
-
-import java.util.List;
+import BattleshipsExamplePlayer.Firing.OpponentsBoard;
+import BattleshipsExamplePlayer.Board.Square;
 
 /**
  * Created by TEE on 11/09/2016.

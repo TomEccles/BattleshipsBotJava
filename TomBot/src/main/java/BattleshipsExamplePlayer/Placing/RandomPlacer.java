@@ -1,6 +1,6 @@
 package BattleshipsExamplePlayer.Placing;
 
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Board.Square;
 import BattleshipsInterface.EShipType;
 import BattleshipsInterface.IShipPosition;
 

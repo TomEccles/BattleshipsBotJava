@@ -1,4 +1,4 @@
-package BattleshipsExamplePlayer;
+package BattleshipsExamplePlayer.Board;
 
 /**
  * Created by TEE on 10/09/2016.

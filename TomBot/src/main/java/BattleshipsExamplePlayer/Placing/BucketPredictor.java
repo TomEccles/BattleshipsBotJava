@@ -1,5 +1,6 @@
-package BattleshipsExamplePlayer;
+package BattleshipsExamplePlayer.Placing;
 
+import BattleshipsExamplePlayer.Logger;
 import javafx.util.Pair;
 
 import java.io.IOException;

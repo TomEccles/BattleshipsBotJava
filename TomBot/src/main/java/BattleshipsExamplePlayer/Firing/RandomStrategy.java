@@ -1,10 +1,9 @@
 package BattleshipsExamplePlayer.Firing;
 
-import BattleshipsExamplePlayer.Square;
-import BattleshipsExamplePlayer.SquareState;
+import BattleshipsExamplePlayer.Board.Square;
+import BattleshipsExamplePlayer.Board.SquareState;
 
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * Created by TEE on 10/09/2016.

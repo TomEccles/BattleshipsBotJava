@@ -1,7 +1,7 @@
 package BattleshipsExamplePlayer.Firing;
 
-import BattleshipsExamplePlayer.Square;
-import BattleshipsExamplePlayer.SquareState;
+import BattleshipsExamplePlayer.Board.Square;
+import BattleshipsExamplePlayer.Board.SquareState;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -134,12 +134,12 @@ public class OpponentsBoard {
         }
     }
 
-    public List<Square> getEmpties() {
+    public List<Square> getSquares(SquareState state) {
         List<Square> empties = new ArrayList<>();
         for (int i = 0; i < side; i++) {
             for (int j = 0; j < side; j++) {
                 Square attempt = new Square(i,j);
-                if(state(attempt) == SquareState.unknown) empties.add(attempt);
+                if(state(attempt) == state) empties.add(attempt);
             }
         }
         return empties;

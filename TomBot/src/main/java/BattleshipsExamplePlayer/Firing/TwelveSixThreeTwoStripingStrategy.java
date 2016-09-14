@@ -1,6 +1,7 @@
 package BattleshipsExamplePlayer.Firing;
 
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Firing.Scorers.IScorer;
+import BattleshipsExamplePlayer.Board.Square;
 
 import java.util.Optional;
 import java.util.Random;

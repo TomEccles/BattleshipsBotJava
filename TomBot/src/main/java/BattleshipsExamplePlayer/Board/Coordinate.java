@@ -1,4 +1,4 @@
-package BattleshipsExamplePlayer;
+package BattleshipsExamplePlayer.Board;
 
 import BattleshipsInterface.ICoordinate;
 

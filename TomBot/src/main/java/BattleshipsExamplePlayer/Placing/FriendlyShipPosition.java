@@ -1,6 +1,6 @@
 package BattleshipsExamplePlayer.Placing;
 
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Board.Square;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package BattleshipsExamplePlayer.Firing;
 
-import BattleshipsExamplePlayer.Square;
+import BattleshipsExamplePlayer.Board.Square;
 
 import java.util.Optional;
 

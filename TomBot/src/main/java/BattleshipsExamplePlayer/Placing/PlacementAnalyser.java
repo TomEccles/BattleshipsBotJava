@@ -1,10 +1,10 @@
-package BattleshipsExamplePlayer;
+package BattleshipsExamplePlayer.Placing;
 
 import BattleshipsExamplePlayer.Firing.OpponentsBoard;
-import BattleshipsExamplePlayer.Placing.FriendlyShipPosition;
+import BattleshipsExamplePlayer.Logger;
+import BattleshipsExamplePlayer.Board.Square;
 import javafx.util.Pair;
 
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
